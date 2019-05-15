@@ -1,9 +1,12 @@
 module.exports = (app) => {
-    const roomControllerSecured = require('../controller/AppController');
+    const appController = require('../controller/AppController');
 
     app.route('/api/hello-world')
-        .get(roomControllerSecured.helloWorld);
+        .get(appController.helloWorld);
 
-    app.route('/api/fibonacci-series')
-        .get(roomControllerSecured.getFibonacciSeries);
+    app.route('/api/fib-series-recursively')
+        .get(appController.getFibonacciSeriesRecursively);
+
+    app.route('/api/fib-series-iteratively')
+        .get(appController.getFibonacciSeriesIteratively);
 };

@@ -6,9 +6,20 @@ module.exports.helloWorld = async (req, res) => {
     });
 };
 
-module.exports.getFibonacciSeries = async (req, res) => {
+module.exports.getFibonacciSeriesRecursively = async (req, res) => {
     try {
-        const fibonacciSeries = await roomService.getFibonacciSeries(req.query.n);
+        const fibonacciSeries = await roomService.getFibonacciSeriesRecursively(req.query.n);
+        return res.send(fibonacciSeries);
+    } catch (error) {
+        return res.status(500).send({
+            message: error.message
+        });
+    }
+};
+
+module.exports.getFibonacciSeriesIteratively = async (req, res) => {
+    try {
+        const fibonacciSeries = await roomService.getFibonacciSeriesIteratively(req.query.n);
         return res.send(fibonacciSeries);
     } catch (error) {
         return res.status(500).send({
