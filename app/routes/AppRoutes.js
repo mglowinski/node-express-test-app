@@ -4,6 +4,9 @@ module.exports = (app) => {
     app.route('/api/hello-world')
         .get(appController.helloWorld);
 
+    app.route('/api/sum-of-squares')
+        .get(appController.getSumOfSquares);
+
     app.route('/api/fib-series-recursively')
         .get(appController.getFibonacciSeriesRecursively);
 

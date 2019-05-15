@@ -1,3 +1,15 @@
+module.exports.getSumOfSquares = async (n) => {
+    if (!n) {
+        n = 10;
+    }
+
+    let sum = 0;
+    for (let i = 0; i < n; i++) {
+        sum += (i * i);
+    }
+    return sum;
+};
+
 module.exports.getFibonacciSeriesRecursively = async (n) => {
     const results = [];
 
