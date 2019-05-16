@@ -24,23 +24,25 @@ module.exports.getFibonacciSeriesRecursively = async (n) => {
     return results;
 };
 
-module.exports.getFibonacciSeriesIteratively = async (n) => {
-    const results = [];
-
-    let x = 0, y = 1;
-
+module.exports.getFibonacciValueIteratively = async (n) => {
     if (!n) {
         n = 10;
     }
 
-    for (let i = 0; i < n; i++) {
-        const z = x + y;
-        results.push(z);
-        x = y;
-        y = z;
+    if (n <= 1) {
+        return n;
     }
 
-    return results;
+    let fib = 1;
+    let prevFib = 1;
+
+    for (let i = 2; i < n; i++) {
+        const temp = fib;
+        fib += prevFib;
+        prevFib = temp;
+    }
+
+    return fib;
 };
 
 function fib(n) {

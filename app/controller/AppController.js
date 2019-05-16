@@ -35,10 +35,12 @@ module.exports.getFibonacciSeriesRecursively = async (req, res) => {
     }
 };
 
-module.exports.getFibonacciSeriesIteratively = async (req, res) => {
+module.exports.getFibonacciValueIteratively = async (req, res) => {
     try {
-        const fibonacciSeries = await roomService.getFibonacciSeriesIteratively(req.query.n);
-        return res.send(fibonacciSeries);
+        const fibonacciSeries = await roomService.getFibonacciValueIteratively(req.query.n);
+        return res.send({
+            fibValue: fibonacciSeries
+        });
     } catch (error) {
         return res.status(500).send({
             message: error.message

@@ -10,6 +10,6 @@ module.exports = (app) => {
     app.route('/api/fib-series-recursively')
         .get(appController.getFibonacciSeriesRecursively);
 
-    app.route('/api/fib-series-iteratively')
-        .get(appController.getFibonacciSeriesIteratively);
+    app.route('/api/fib-value-iteratively')
+        .get(appController.getFibonacciValueIteratively);
 };
