@@ -12,4 +12,10 @@ module.exports = (app) => {
 
     app.route('/api/fib-value-iteratively')
         .get(appController.getFibonacciValueIteratively);
+
+    app.route('/api/mongo/users')
+        .get(appController.getUsers);
+
+    app.route('/api/mongo/users/addresses')
+        .get(appController.getUsersAddresses);
 };

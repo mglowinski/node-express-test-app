@@ -47,3 +47,25 @@ module.exports.getFibonacciValueIteratively = async (req, res) => {
         });
     }
 };
+
+module.exports.getUsers = async (req, res) => {
+    try {
+        const users = await roomService.getUsers(req.query.postCode, req.query.country);
+        return res.send(users);
+    } catch (error) {
+        return res.status(500).send({
+            message: error.message
+        });
+    }
+};
+
+module.exports.getUsersAddresses = async (req, res) => {
+    try {
+        const users = await roomService.getUsers();
+        return res.send(users.map(user => user.address));
+    } catch (error) {
+        return res.status(500).send({
+            message: error.message
+        });
+    }
+};

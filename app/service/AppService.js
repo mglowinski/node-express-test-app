@@ -1,3 +1,5 @@
+const User = require('../database/models/User');
+
 module.exports.getSumOfSquares = async (n) => {
     if (!n) {
         n = 10;
@@ -43,6 +45,21 @@ module.exports.getFibonacciValueIteratively = async (n) => {
     }
 
     return fib;
+};
+
+module.exports.getUsers = async (postCode, country) => {
+    return User.find({
+        ...postCode && {
+            'address.postCode': postCode
+        },
+        ...country && {
+            countries: {
+                $elemMatch: {
+                    name: country
+                }
+            }
+        }
+    });
 };
 
 function fib(n) {
