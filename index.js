@@ -5,6 +5,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+const mongoConnector = require('./app/database/mongo/MongoConnector');
 const appRoutes = require('./app/routes/AppRoutes')(app);
 
 const port = process.env.PORT || 8040;
