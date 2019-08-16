@@ -1,4 +1,6 @@
 const User = require('../database/models/User');
+const mySqlConnector = require('../database/mysql/MySqlConnector');
+const Queries = require('../database/mysql/Queries');
 
 module.exports.getSumOfSquares = async (n) => {
     if (!n) {
@@ -47,7 +49,7 @@ module.exports.getFibonacciValueIteratively = async (n) => {
     return fib;
 };
 
-module.exports.getUsers = async (postCode, country) => {
+module.exports.getUsersFromMongo = async (postCode, country) => {
     return User.find({
         ...postCode && {
             'address.postCode': postCode
@@ -60,6 +62,22 @@ module.exports.getUsers = async (postCode, country) => {
             }
         }
     });
+};
+
+module.exports.getUsersFromMySql = async (postCode, country) => {
+    let query;
+
+    if (postCode && country) {
+        query = Queries.queryForUsersFilteredByPostCodeAndCountryName(postCode, country);
+    } else if (postCode) {
+        query = Queries.queryForUsersFilteredByPostCode(postCode);
+    } else if (country) {
+        query = Queries.queryForUsersFilteredByCountry(country);
+    } else {
+        query = Queries.queryForAllUsers();
+    }
+
+    return await mySqlConnector.createQuery(query);
 };
 
 function fib(n) {

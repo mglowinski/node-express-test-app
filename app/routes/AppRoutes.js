@@ -14,8 +14,11 @@ module.exports = (app) => {
         .get(appController.getFibonacciValueIteratively);
 
     app.route('/api/mongo/users')
-        .get(appController.getUsers);
+        .get(appController.getUsersFromMongo);
 
     app.route('/api/mongo/users/addresses')
-        .get(appController.getUsersAddresses);
+        .get(appController.getUsersAddressesFromMongo);
+
+    app.route('/api/mysql/users')
+        .get(appController.getUsersFromMySql);
 };

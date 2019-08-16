@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const mongoConfiguration = require('./MongoProperties');
+const MongoProperties = require('./MongoProperties');
 
 mongoose.set('useFindAndModify', false);
 
 const dbURI = "mongodb://" +
-    mongoConfiguration.host + ":" +
-    mongoConfiguration.port + "/" +
-    mongoConfiguration.name;
+    MongoProperties.host + ":" +
+    MongoProperties.port + "/" +
+    MongoProperties.name;
 
 mongoose.connect(dbURI, {useNewUrlParser: true});
 
