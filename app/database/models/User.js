@@ -7,7 +7,7 @@ const User = new mongoose.Schema({
     username: String,
     firstName: String,
     lastName: String,
-    countries: [Country],
+    country: Country,
     address: Address
 }, {
     versionKey: false

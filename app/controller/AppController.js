@@ -73,10 +73,27 @@ module.exports.getUsersAddressesFromMongo = async (req, res) => {
 module.exports.getUsersFromMySql = async (req, res) => {
     try {
         const users = await appService.getUsersFromMySql(req.query.postCode, req.query.country);
-        return res.send(users);
+        return res.send(users.map(user => mapUsers(user)));
     } catch (error) {
         return res.status(500).send({
             message: error
         });
     }
 };
+
+function mapUsers(user) {
+    return {
+        id: user.id,
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        country: {
+            name: user.name
+        },
+        address: {
+            id: user.addressId,
+            street: user.street,
+            postCode: user.postCode
+        }
+    }
+}
