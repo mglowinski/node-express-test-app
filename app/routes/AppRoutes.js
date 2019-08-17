@@ -21,4 +21,7 @@ module.exports = (app) => {
 
     app.route('/api/mysql/users')
         .get(appController.getUsersFromMySql);
+
+    app.route('/api/mysql/users/addresses')
+        .get(appController.getUsersAddressesFromMySql);
 };

@@ -55,11 +55,7 @@ module.exports.getUsersFromMongo = async (postCode, country) => {
             'address.postCode': postCode
         },
         ...country && {
-            countries: {
-                $elemMatch: {
-                    name: country
-                }
-            }
+            'country.name': country
         }
     });
 };

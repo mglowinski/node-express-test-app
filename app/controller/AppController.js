@@ -81,6 +81,17 @@ module.exports.getUsersFromMySql = async (req, res) => {
     }
 };
 
+module.exports.getUsersAddressesFromMySql = async (req, res) => {
+    try {
+        const users = await appService.getUsersFromMySql();
+        return res.send(users.map(user => mapAddresses(user)));
+    } catch (error) {
+        return res.status(500).send({
+            message: error.message
+        });
+    }
+};
+
 function mapUsers(user) {
     return {
         id: user.id,
@@ -95,5 +106,13 @@ function mapUsers(user) {
             street: user.street,
             postCode: user.postCode
         }
+    }
+}
+
+function mapAddresses(user) {
+    return {
+        id: user.addressId,
+        street: user.street,
+        postCode: user.postCode
     }
 }
