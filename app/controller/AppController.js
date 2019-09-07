@@ -62,7 +62,12 @@ module.exports.getUsersFromMongo = async (req, res) => {
 module.exports.getUsersAddressesFromMongo = async (req, res) => {
     try {
         const users = await appService.getUsersFromMongo();
-        return res.send(users.map(user => user.address));
+        return res.send(users.map(user => {
+            return {
+                userId: user._id,
+                address: user.address
+            }
+        }));
     } catch (error) {
         return res.status(500).send({
             message: error.message
@@ -83,8 +88,8 @@ module.exports.getUsersFromMySql = async (req, res) => {
 
 module.exports.getUsersAddressesFromMySql = async (req, res) => {
     try {
-        const users = await appService.getUsersFromMySql();
-        return res.send(users.map(user => mapAddresses(user)));
+        const usersAddresses = await appService.getUsersAddressesFromMySql();
+        return res.send(usersAddresses.map(userAddress => mapAddresses(userAddress)));
     } catch (error) {
         return res.status(500).send({
             message: error.message
@@ -109,10 +114,13 @@ function mapUsers(user) {
     }
 }
 
-function mapAddresses(user) {
+function mapAddresses(userAddress) {
     return {
-        id: user.addressId,
-        street: user.street,
-        postCode: user.postCode
+        userId: userAddress.id,
+        address: {
+            id: userAddress.addressId,
+            street: userAddress.street,
+            postCode: userAddress.postCode
+        }
     }
 }

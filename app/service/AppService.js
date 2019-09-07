@@ -76,6 +76,13 @@ module.exports.getUsersFromMySql = async (postCode, country) => {
     return await mySqlConnector.createQuery(query);
 };
 
+module.exports.getUsersAddressesFromMySql = async () => {
+    const query = `SELECT users.id, users.addressId, addresses.street, addresses.postCode FROM users \ 
+     INNER JOIN addresses ON users.addressId = addresses.id \ 
+     INNER JOIN countries ON users.countryId = countries.id`;
+    return await mySqlConnector.createQuery(query);
+};
+
 function fib(n) {
     if (n > 1) {
         return fib(n - 1) + fib(n - 2);
