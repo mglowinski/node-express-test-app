@@ -5,9 +5,9 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-const mongoConnector = require('./app/database/mongo/MongoConnector');
-const mySqlConnector = require('./app/database/mysql/MySqlConnector');
-const appRoutes = require('./app/routes/AppRoutes')(app);
+require('./app/database/mongo/MongoConnector');
+require('./app/database/mysql/MySqlConnector');
+require('./app/routes/AppRoutes')(app);
 
 const port = process.env.PORT || 8040;
 

@@ -1,5 +1,12 @@
 const appService = require('../service/AppService');
 
+module.exports.fillData = async (req, res) => {
+    await appService.fillData();
+    return res.status(204).send({
+        message: 'Data filled'
+    });
+};
+
 module.exports.helloWorld = async (req, res) => {
     return res.json({
         hello1: 'world1',

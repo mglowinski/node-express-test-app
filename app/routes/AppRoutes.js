@@ -1,6 +1,9 @@
 module.exports = (app) => {
     const appController = require('../controller/AppController');
 
+    app.route('/api/fill-data')
+        .get(appController.fillData);
+
     app.route('/api/hello-world')
         .get(appController.helloWorld);
 

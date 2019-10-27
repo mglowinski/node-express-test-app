@@ -2,6 +2,35 @@ const User = require('../database/models/User');
 const mySqlConnector = require('../database/mysql/MySqlConnector');
 const Queries = require('../database/mysql/Queries');
 
+module.exports.fillData = async () => {
+    for (let i = 0; i < 1000; i++) {
+        let country;
+        let postCode;
+        if (i % 2 === 0) {
+            country = 'Poland';
+            postCode = '93-267';
+        } else {
+            country = 'England';
+            postCode = '93-100';
+        }
+
+        const user = new User({
+            username: 'Sample_User_' + i,
+            firstName: 'Sample_User_' + i,
+            lastName: 'Sample_User_' + i,
+            country: {
+                name: country
+            },
+            address: {
+                street: 'Sample_Street_' + i,
+                postCode: postCode
+            }
+        });
+
+        await user.save();
+    }
+};
+
 module.exports.getSumOfSquares = async (n) => {
     if (!n) {
         n = 10;
