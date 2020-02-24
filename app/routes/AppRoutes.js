@@ -1,17 +1,11 @@
 module.exports = (app) => {
     const appController = require('../controller/AppController');
 
-    app.route('/api/fill-data')
-        .get(appController.fillData);
-
     app.route('/api/hello-world')
         .get(appController.helloWorld);
 
     app.route('/api/sum-of-squares')
         .get(appController.getSumOfSquares);
-
-    app.route('/api/fib-series-recursively')
-        .get(appController.getFibonacciSeriesRecursively);
 
     app.route('/api/fib-value-iteratively')
         .get(appController.getFibonacciValueIteratively);
@@ -19,12 +13,6 @@ module.exports = (app) => {
     app.route('/api/mongo/users')
         .get(appController.getUsersFromMongo);
 
-    app.route('/api/mongo/users/addresses')
-        .get(appController.getUsersAddressesFromMongo);
-
     app.route('/api/mysql/users')
         .get(appController.getUsersFromMySql);
-
-    app.route('/api/mysql/users/addresses')
-        .get(appController.getUsersAddressesFromMySql);
 };

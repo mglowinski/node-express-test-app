@@ -1,12 +1,5 @@
 const appService = require('../service/AppService');
 
-module.exports.fillData = async (req, res) => {
-    await appService.fillData();
-    return res.status(204).send({
-        message: 'Data filled'
-    });
-};
-
 module.exports.helloWorld = async (req, res) => {
     return res.json({
         hello1: 'world1',
@@ -24,17 +17,6 @@ module.exports.getSumOfSquares = async (req, res) => {
         return res.send({
             sumOfSquares: sumOfSquares
         });
-    } catch (error) {
-        return res.status(500).send({
-            message: error.message
-        });
-    }
-};
-
-module.exports.getFibonacciSeriesRecursively = async (req, res) => {
-    try {
-        const fibonacciSeries = await appService.getFibonacciSeriesRecursively(req.query.n);
-        return res.send(fibonacciSeries);
     } catch (error) {
         return res.status(500).send({
             message: error.message
@@ -66,22 +48,6 @@ module.exports.getUsersFromMongo = async (req, res) => {
     }
 };
 
-module.exports.getUsersAddressesFromMongo = async (req, res) => {
-    try {
-        const users = await appService.getUsersFromMongo();
-        return res.send(users.map(user => {
-            return {
-                userId: user._id,
-                address: user.address
-            }
-        }));
-    } catch (error) {
-        return res.status(500).send({
-            message: error.message
-        });
-    }
-};
-
 module.exports.getUsersFromMySql = async (req, res) => {
     try {
         const users = await appService.getUsersFromMySql(req.query.postCode, req.query.country);
@@ -89,17 +55,6 @@ module.exports.getUsersFromMySql = async (req, res) => {
     } catch (error) {
         return res.status(500).send({
             message: error
-        });
-    }
-};
-
-module.exports.getUsersAddressesFromMySql = async (req, res) => {
-    try {
-        const usersAddresses = await appService.getUsersAddressesFromMySql();
-        return res.send(usersAddresses.map(userAddress => mapAddresses(userAddress)));
-    } catch (error) {
-        return res.status(500).send({
-            message: error.message
         });
     }
 };
@@ -117,17 +72,6 @@ function mapUsers(user) {
             id: user.addressId,
             street: user.street,
             postCode: user.postCode
-        }
-    }
-}
-
-function mapAddresses(userAddress) {
-    return {
-        userId: userAddress.id,
-        address: {
-            id: userAddress.addressId,
-            street: userAddress.street,
-            postCode: userAddress.postCode
         }
     }
 }

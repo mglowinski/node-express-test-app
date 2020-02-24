@@ -9,12 +9,6 @@ const pool = mysql.createPool({
     database: MySqlProperties.database
 });
 
-module.exports.getConnection = (callback) => {
-    pool.getConnection((err, connection) => {
-        callback(err, connection);
-    });
-};
-
 module.exports.createQuery = (query) => {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
